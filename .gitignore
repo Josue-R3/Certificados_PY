@@ -1,0 +1,60 @@
+# Python general
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+
+# Logs y depuración
+*.log
+
+# Archivos de configuración local y de entorno
+.env
+*.env
+
+# Cachés
+.cache/
+*.pyc
+*.pyo
+
+# Archivos de IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Librerías y empaquetados
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Archivos específicos de FastAPI y Pillow
+*.db
+*.sqlite3
+
+# Docker (si aplicara en el futuro)
+docker-compose.override.yml
+
+# Node.js (si utilizaras npm para algo)
+node_modules/
+
+# Azure SDK
+*.azcli
+
+# Archivos específicos del sistema
+.DS_Store
+Thumbs.db
+
+# Herramientas de pruebas
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Excepciones: Incluir plantillas y fuentes
+!template/
+!font/
