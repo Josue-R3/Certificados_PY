@@ -180,15 +180,27 @@ async def process_certificate(data: CertificateData) -> dict:
 async def generate_certificates(data_list: List[CertificateData]):
     try:
         logger.info(f"Procesando un lote de {len(data_list)} certificados.")
+
+        # Validar que todos los datos sean válidos
+        for data in data_list:
+            if not all([data.numeracion, data.nombre, data.identificacion, data.carrera, data.rol]):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Faltan campos obligatorios en la identificación {data.identificacion}"
+                )
+
         tasks = [process_certificate(data) for data in data_list]
         results = await asyncio.gather(*tasks)
         logger.info("Proceso de generación y subida completado.")
         return JSONResponse(content={"results": results}, status_code=200)
 
+    except HTTPException as e:
+        logger.error(f"Error en los datos enviados: {e.detail}")
+        raise e
+
     except Exception as e:
         logger.error(f"Error general en el proceso: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 # Evento de inicio para cargar recursos
 @app.on_event("startup")
