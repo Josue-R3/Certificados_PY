@@ -131,7 +131,7 @@ async def process_certificate(data: CertificateData) -> dict:
         carrera_primary_position = (70, 880)
         carrera_secondary_position = (70, 970)
 
-        max_width = 900
+        max_width = 990
         lines = []
         current_line = ""
         for word in carrera.split():

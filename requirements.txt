@@ -3,3 +3,4 @@ pillow
 python-barcode
 aiohttp
 azure-storage-blob
+uvicorn
