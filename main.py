@@ -80,8 +80,10 @@ def generate_barcode(data: str) -> Image:
         options = {'write_text': False}
         barcode_instance.write(buffer, options)
         buffer.seek(0)
-        barcode_image = Image.open(buffer)
-        return barcode_image.rotate(90, expand=True) # Rotar el codigo de barras 90 grados
+        # codigo si se quiere rotar el codigo de barras
+        #barcode_image = Image.open(buffer)
+        #return barcode_image.rotate(90, expand=True) # Rotar el codigo de barras 90 grados
+        return Image.open(buffer)
     except Exception as e:
         raise RuntimeError(f"Error al generar el código de barras: {e}")
 
@@ -111,10 +113,10 @@ async def process_certificate(data: CertificateData) -> dict:
 
         # Coordenadas de textos generales
         text_positions = {
-            "numeracion": (1650, 137),
+            "numeracion": (1650, 217),
             "nombre": (70, 460),
             "identificacion": (70, 680),
-            "rol": (1260, 900),
+            "rol": (1350, 850),
         }
 
         # Dibujar textos generales
@@ -148,8 +150,8 @@ async def process_certificate(data: CertificateData) -> dict:
             draw.text(carrera_secondary_position, lines[1], font=font_regular, fill="black")
 
         # Generar código de barras
-        barcode_image = generate_barcode(data.identificacion).resize((150, 1300))
-        barcode_position = (1830, 210)
+        barcode_image = generate_barcode(data.identificacion).resize((940, 100))
+        barcode_position = (1090, 18)
         template_copy.paste(barcode_image, barcode_position)
 
         logger.info(f"Certificado generado para identificación: {data.identificacion} en {time.time() - start_time:.2f} segundos")
